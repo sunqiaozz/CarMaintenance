@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MaintenanceApplication {
 
     public static void main(String[] args) {
+        System.out.println("gitee test");
         System.out.println("github test2");
         System.out.println("zz merge test2");
         System.out.println("github test");
