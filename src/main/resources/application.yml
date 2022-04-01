@@ -1,0 +1,30 @@
+server:
+  port: 8090
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/car_maintenance?characterEncoding=utf8
+    username: root
+    password: 996562383
+  #邮箱配置
+  mail:
+    default-encoding: utf-8
+    username: 996562383@qq.com
+    #swulguyattyfbded
+    password: swulguyattyfbded
+    host: smtp.qq.com
+
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  #日志功能
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+  type-aliases-package: classpath:com.zy.maintenance.bean
+
+files:
+  upload:
+    path: E:/CarFile/files/
+
+

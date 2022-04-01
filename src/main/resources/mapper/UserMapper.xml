@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.maintenance.mapper.UserMapper">
+    <sql id="base_queryUserOrder">
+        from car_order o
+        left join `user` u on o.user_id=u.user_id
+        left join package p on o.package_id=p.package_id
+        where user_name=#{userName}
+        <if test="orderStatus!=null and orderStatus!=''">
+            and order_status=#{orderStatus}
+        </if>
+    </sql>
+    <select id="queryUserOrder" resultType="com.zy.maintenance.bean.info.UserHtmlOrder">
+        select u.user_id,u.user_name,o.order_id,o.order_status,o.order_progress,o.order_time,p.package_name,p.package_type,p.package_price
+        <include refid="base_queryUserOrder"></include>
+        limit #{pageNum},#{pageSize}
+    </select>
+    <select id="queryUserOrderTotal" resultType="integer">
+        select count(*)
+        <include refid="base_queryUserOrder"></include>
+    </select>
+    <update id="updateUserPass">
+        update user
+        set password=#{password}
+        where user_id=#{userId}
+    </update>
+</mapper>

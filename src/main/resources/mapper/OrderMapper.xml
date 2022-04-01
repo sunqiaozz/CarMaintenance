@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.maintenance.mapper.OrderMapper">
+    <resultMap id="orderMap" type="com.zy.maintenance.bean.Order">
+        <id property="orderId" column="order_id"/>
+        <result property="orderStatus" column="order_status"/>
+        <result property="orderProgress" column="order_progress"/>
+        <result property="orderTime" column="order_time"/>
+        <association property="userInfo" javaType="com.zy.maintenance.bean.info.UserInfo">
+            <id property="userId" column="user_id"/>
+            <result property="userName" column="user_name"/>
+            <result property="telephone" column="telephone"/>
+            <result property="email" column="email"/>
+        </association>
+        <association property="packageInfo" javaType="com.zy.maintenance.bean.info.PackageInfo">
+            <id property="packageId" column="package_id"/>
+            <result property="packageName" column="package_name"/>
+            <result property="packageContent" column="package_content"/>
+            <result property="packageType" column="package_type"/>
+            <result property="packagePrice" column="package_price"/>
+        </association>
+    </resultMap>
+    <!--@Param("pageNum") Integer pageNum, @Param("pageSize")Integer pageSize,
+    @Param("searchType") String searchType, @Param("searchContent")String searchContent-->
+    <sql id="select_table">
+        select o.*,u.user_name,u.telephone,u.email,p.package_name,p.package_content,p.package_type,p.package_price
+        from `car_order` o
+        left join user u on u.user_id=o.user_id
+        left join package p on o.package_id=p.package_id
+    </sql>
+    <sql id="where_test">
+        <if test="searchType!='' and searchType !=null">
+            where
+            <if test="searchType == 'user_name'">
+                u.user_name
+            </if>
+            <if test="searchType == 'package_name'">
+                p.package_name
+            </if>
+            <if test="searchType == 'order_status'">
+                o.order_status
+            </if>
+            <if test="searchType == 'order_progress'">
+                o.order_progress
+            </if>
+            <bind name="_content" value="'%'+searchContent+'%'"/>
+            like #{_content}
+        </if>
+    </sql>
+    <select id="orderPage" resultMap="orderMap">
+        <include refid="select_table"></include>
+        <include refid="where_test"></include>
+        order by o.order_id desc
+        limit #{pageNum},#{pageSize};
+    </select>
+    <select id="orderTotal" resultType="integer">
+        select count(*)
+        from `car_order` o
+        left join user u on u.user_id=o.user_id
+        left join package p on o.package_id=p.package_id
+        <include refid="where_test"></include>
+    </select>
+    <select id="allOrderInfo" resultMap="orderMap">
+        <include refid="select_table"></include>
+    </select>
+    <select id="countPrice" resultType="double">
+        SELECT SUM(p.`package_price`)
+        FROM car_order o
+                 LEFT JOIN package p ON o.`package_id`=p.`package_id`
+        WHERE o.`order_status`='已支付'
+    </select>
+</mapper>

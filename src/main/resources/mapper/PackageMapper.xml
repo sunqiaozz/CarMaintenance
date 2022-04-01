@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.maintenance.mapper.PackageMapper">
+    <select id="selectAllType" resultType="string">
+        SELECT DISTINCT package_type
+        FROM package;
+    </select>
+    <select id="selectPackageAllTime" resultType="date">
+        select order_time
+        from car_order o
+        left join package p on p.package_id=o.package_id
+        where package_type=#{type};
+    </select>
+
+</mapper>
