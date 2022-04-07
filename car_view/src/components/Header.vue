@@ -35,6 +35,13 @@ export default {
       sideWidth:'200px',
     }
   },
+  mounted() {
+    this.$bus.$on("changeAvatar",(avatar)=>{
+      this.manager.avatar=avatar
+      //this.manager.token=localStorage.getItem("token");
+      localStorage.setItem("manager",JSON.stringify(this.manager))
+    })
+  },
   methods:{
     //个人信息
     updateInfo(){
@@ -64,6 +71,9 @@ export default {
         this.$bus.$emit('sideShow',this.sideWidth)
       }
     }
+  },
+  beforeDestroy() {
+    this.$bus.$off("changeAvatar")
   }
 }
 </script>

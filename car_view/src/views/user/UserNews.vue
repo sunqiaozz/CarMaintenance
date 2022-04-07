@@ -48,6 +48,7 @@ export default {
       this.newTime=item.newTime
     },
     load () {
+      localStorage.setItem("token",JSON.parse(localStorage.getItem("user")).token)
       this.$http.get('/common/news').then(res=>{
         this.total=res.data.total
         this.cardData=res.data.records

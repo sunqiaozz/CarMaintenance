@@ -56,15 +56,16 @@ export default {
     },
     //修改保存
     save(){
+      localStorage.setItem("token",JSON.parse(localStorage.getItem("manager")).token)
       this.form.manageId=this.manage.manageId
       this.$http.post("/manage/save",this.form).then(res=>{
         if(res.code==='200'){
           this.$message.success("保存成功")
-          this.getManage().then(res=>{
-            localStorage.setItem("manager",JSON.stringify(res))
-          })
-          this.$router.go(0)
-          //this.reload()
+          this.$bus.$emit("changeAvatar",this.form.avatar)
+          // this.getManage().then(res=>{
+          //   //const manager=res;manager.token=JSON.parse(localStorage.getItem("token"));
+          //   localStorage.setItem("manager",JSON.stringify(res))
+          // })
         }else{
           this.$message.error("保存失败")
         }

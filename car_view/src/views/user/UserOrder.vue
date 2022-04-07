@@ -77,6 +77,7 @@ export default {
       userParams.push(this.radioValue)
       userParams.push(this.pageNum)
       userParams.push(this.pageSize)
+      localStorage.setItem("token",JSON.parse(localStorage.getItem("user")).token)
       this.$http.post("/user/order", userParams).then(res=>{
         if(res.code==='200'){
           this.tableData=res.data.orders

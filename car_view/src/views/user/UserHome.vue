@@ -42,6 +42,13 @@ export default {
       user:localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {},
     }
   },
+  mounted() {
+    this.$bus.$on("changeUserAvatar",(avatar)=>{
+      this.user.avatar=avatar
+      //this.token=localStorage.getItem("token");
+      localStorage.setItem("user",JSON.stringify(this.user))
+    })
+  },
   methods:{
     //更新个人信息
     updateInfo(){
@@ -52,6 +59,9 @@ export default {
       localStorage.removeItem("user")
       this.$message.success("退出成功")
     }
+  },
+  beforeDestroy() {
+    this.$bus.$off("changeUserAvatar")
   }
 }
 </script>

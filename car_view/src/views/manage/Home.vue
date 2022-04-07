@@ -49,6 +49,7 @@ export default {
     }
   },
   created() {
+    localStorage.setItem("token",JSON.parse(localStorage.getItem("manager")).token)
     this.$http.get("/echarts/num").then(res=>{
       this.userCount=res.data.userCount
       this.packageCount=res.data.packageCount
@@ -111,6 +112,7 @@ export default {
       }
     };
     myChart.showLoading();
+    localStorage.setItem("token",JSON.parse(localStorage.getItem("manager")).token)
     this.$http.get("/echarts/packageNum").then(res=>{
       for (let i = 0; i < res.data.types.length; i++) {
         const seriesOneObject={}

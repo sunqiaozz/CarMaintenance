@@ -174,6 +174,7 @@ export default {
     },
     //删除
     del(id){
+      localStorage.setItem("token",JSON.parse(localStorage.getItem("manager")).token)
       this.$http.delete("/order/delete/"+id).then(res =>{
         if(res.data){
           console.log(res)
@@ -189,6 +190,7 @@ export default {
       this.multipleSelection=val
     },
     delBatch(){
+      localStorage.setItem("token",JSON.parse(localStorage.getItem("manager")).token)
       let ids=this.multipleSelection.map(v => v.orderId) //将对象数组转为对象id的数组
       this.$http.delete("/order/deleteAll",{data:ids}).then(res =>{
         if(res){
@@ -211,6 +213,7 @@ export default {
     },
     //初始化加载搜索
     load(){
+      localStorage.setItem("token",JSON.parse(localStorage.getItem("manager")).token)
       this.$http.get("/order/page",{
         params:{
           pageNum:this.pageNum,

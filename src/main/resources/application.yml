@@ -1,6 +1,7 @@
 server:
   port: 8090
 spring:
+  #mysql
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/car_maintenance?characterEncoding=utf8
@@ -13,6 +14,25 @@ spring:
     #swulguyattyfbded
     password: swulguyattyfbded
     host: smtp.qq.com
+  #redis配置
+  redis:
+    host: 192.168.19.129
+    port: 6379
+    password: zhangyu1123..
+    database: 0
+    connect-timeout: 1800000
+    lettuce:
+      pool:
+        max-active: 20
+        max-wait: -1
+        max-idle: 5
+        min-idle: 0
+  #文件上传大小限制
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
 
 
 mybatis-plus:

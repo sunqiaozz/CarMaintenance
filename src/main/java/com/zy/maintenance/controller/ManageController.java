@@ -51,10 +51,7 @@ public class ManageController {
     public Result updateInfo(@RequestBody Manage manage){
         QueryWrapper<Manage> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("manage_id",manage.getManageId());
-        //boolean b = manageService.updateById(manage);
-        manageService.update(manage,queryWrapper);
-        //manageService.updateById(manage);
-        return Result.success();
+        return Result.success(manageService.update(manage,queryWrapper));
     }
     //修改密码
     @GetMapping ("/pass")

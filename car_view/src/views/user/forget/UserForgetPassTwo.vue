@@ -47,6 +47,7 @@ export default {
       }).then(res=>{
         console.log(res.data)
         this.code = res.data
+        console.log(res.data)
         console.log(this.code)
       })
     }

@@ -3,7 +3,7 @@ import ElementUI from 'element-ui';
 
 const service=axios.create({
     baseURL: 'http://localhost:8090',//同意请求前缀
-    timeout: 5000,
+    timeout: 50000,
 })
 //设置请求拦截器，post请求内容类型
 service.defaults.headers.post['Content-Type']='application/json';

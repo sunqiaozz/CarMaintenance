@@ -42,12 +42,12 @@ export default {
   data(){
     return{
       list_img:[
-        {url:require('../../assets/img/7.jpg')},
-        {url:require('../../assets/img/5.jpg')},
-        {url:require('../../assets/img/2.jpg')},
+        {url:require('../../assets/img/11.jpg')},
         {url:require('../../assets/img/1.jpg')},
+        {url:require('../../assets/img/2.jpg')},
         {url:require('../../assets/img/3.jpg')},
-        {url:require('../../assets/img/6.jpg')},
+        {url:require('../../assets/img/4.jpg')},
+        {url:require('../../assets/img/5.jpg')},
       ],
     }
   },

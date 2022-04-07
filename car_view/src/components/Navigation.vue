@@ -49,10 +49,8 @@ export default {
   },
   mounted() {
     this.$bus.$on('textShow',(textShow)=>{
-      //console.log(textShow+"----------------")
       this.textShow=textShow
       this.isCollapse=!this.isCollapse
-      //console.log(this.textShow)
     })
   },
   beforeDestroy() {

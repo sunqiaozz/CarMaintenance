@@ -59,14 +59,15 @@ export default {
     },
     //修改保存
     save(){
+      localStorage.setItem("token",JSON.parse(localStorage.getItem("user")).token)
       this.form.userId=this.user.userId
       this.$http.post("/user/save",this.form).then(res=>{
         if(res.code==='200'){
           this.$message.success("保存成功")
-          this.getUser().then(res=>{
-            localStorage.setItem("user",JSON.stringify(res))
-          })
-          this.$router.go(0)
+          this.$bus.$emit("changeUserAvatar",this.form.avatar)
+          // this.getUser().then(res=>{
+          //   localStorage.setItem("user",JSON.stringify(res))
+          // })
         }else{
           this.$message.error("保存失败")
         }

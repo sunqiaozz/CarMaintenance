@@ -176,6 +176,7 @@ export default {
     },
     //查询所有套餐类型
     allTypes(){
+      localStorage.setItem("token",JSON.parse(localStorage.getItem("user")).token)
       this.$http.get('/store/types').then(res=>{
         for(let i=0;i<res.data.length;i++){
           const option={};
@@ -186,6 +187,7 @@ export default {
       })
     },
     load(){
+      localStorage.setItem("token",JSON.parse(localStorage.getItem("user")).token)
       this.$http.get('/store/packages',{
         params:{
           pageNum:this.pageNum,

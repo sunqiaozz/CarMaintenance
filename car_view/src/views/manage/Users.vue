@@ -178,6 +178,7 @@ export default {
       this.dialogFormVisible=true
     },
     saveUser(){
+      localStorage.setItem("token",JSON.parse(localStorage.getItem("manager")).token)
       this.$http.post("/user/save",this.form).then(res =>{
         if(res.data){
           this.$message.success("保存成功")
@@ -195,6 +196,7 @@ export default {
       this.multipleSelection=val
     },
     delBatch(){
+      localStorage.setItem("token",JSON.parse(localStorage.getItem("manager")).token)
       let ids=this.multipleSelection.map(v => v.userId) //将对象数组转为对象id的数组
       console.log(ids)
       this.$http.delete("/user/deleteAll",{data:ids}).then(res =>{
@@ -215,7 +217,7 @@ export default {
       this.dialogFormVisible=true
     },
     del(id){
-      console.log(id)
+      localStorage.setItem("token",JSON.parse(localStorage.getItem("manager")).token)
       this.$http.delete("/user/delete/"+id).then(res =>{
         if(res.data){
           this.$message.success("删除成功")
@@ -241,6 +243,7 @@ export default {
 
     //初始化查询方法
     load(){
+      localStorage.setItem("token",JSON.parse(localStorage.getItem("manager")).token)
       this.$http.get("/user/page",{
         params:{
           pageNum:this.pageNum,
