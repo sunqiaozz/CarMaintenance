@@ -102,7 +102,11 @@ export default {
       fullscreenLoading: false,
       //模态窗口
       centerDialogVisible:false,
-      order:{}
+      //前台接收每一行的数据，在购买时展示信息
+      order:{},
+      //传给后台的订单信息
+      orderInfo:{},
+
     }
   },
   created() {
@@ -114,9 +118,14 @@ export default {
     //确认信息后向后台响应数据
     orderConfirm(){
       this.centerDialogVisible = false
-      // this.$http.post("/order/insert",this.order).then(res=>{
-      //   console.log(res)
-      // })
+      this.orderInfo.userId=this.order.userId
+      this.orderInfo.packageId=this.order.packageId
+      this.orderInfo.orderTime=this.order.orderTime
+      this.$http.post("/order/insert",this.orderInfo).then(res=>{
+        if (res.data){
+          this.$router.push('/user/order')
+        }
+      })
     },
     //获取当前系统时间戳
     getTodayCourse(){

@@ -10,6 +10,7 @@ import com.zy.maintenance.bean.info.OrderInfo;
 import com.zy.maintenance.common.Result;
 import com.zy.maintenance.service.OrderInfoService;
 import com.zy.maintenance.service.OrderService;
+import com.zy.maintenance.vo.OrderVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -130,9 +131,9 @@ public class OrderController {
         return Result.success(orderService.removeByIds(ids));
     }
     @PostMapping("/insert")
-    public Result insertOrder(){
-
-        return  Result.success();
+    public Result insertOrder(@RequestBody OrderVo orderVo){
+        Boolean saveStatus=orderService.saveOrderVo(orderVo);
+        return  Result.success(saveStatus);
     }
 
 }

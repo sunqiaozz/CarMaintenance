@@ -9,7 +9,7 @@
         </el-radio-group>
       </div>
       <div style="padding: 10px">
-        <el-table :data="tableData" stripe style="width: 100%" highlight-current-row="highlight-current-row">
+        <el-table :data="tableData" stripe style="width: 100%" highlight-current-row="highlight-current-row" @row-click="orderPay" v-loading="fullscreenLoading">
           <el-table-column prop="orderId" label="订单Id" width="80"></el-table-column>
           <el-table-column prop="packageName" label="套餐名称"></el-table-column>
           <el-table-column prop="packageType" label="套餐类型"></el-table-column>
@@ -50,13 +50,41 @@ export default {
       //分页
       total:0,
       pageNum:1,
-      pageSize:5,
+      pageSize:10,
+      //lazy
+      fullscreenLoading: false,
     }
   },
   created(){
     this.load()
+    this.openFullScreen()
   },
   methods:{
+    //lazy
+    openFullScreen() {
+      this.fullscreenLoading = true;
+      setTimeout(() => {
+        this.fullscreenLoading = false;
+      }, 1000);
+    },
+    //点击每一行弹出付款界面
+    orderPay(row){
+      console.log(row)
+      if(row.orderStatus==='已支付'){
+        alert("该订单已支付，无需重复支付")
+      }else{
+        window.open('http://localhost:8090/alipay/payOrder?orderId='+row.orderId+'&packagePrice='+row.packagePrice+'&packageName='+row.packageName)
+        /*this.$http.get('/alipay/payOrder',{
+          params:{
+            orderId:row.orderId,
+            packagePrice:row.packagePrice,
+            packageName:row.packageName
+          }
+        }).then(res=>{
+          console.log(res);
+        })*/
+      }
+    },
     //分页
     handleSizeChange(pageSize){
       this.pageSize=pageSize

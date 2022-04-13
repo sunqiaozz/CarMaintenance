@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zy.maintenance.bean.Order;
 import com.zy.maintenance.mapper.OrderMapper;
 import com.zy.maintenance.service.OrderService;
+import com.zy.maintenance.vo.OrderVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +33,16 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Override
     public Double countPrice() {
         return orderMapper.countPrice();
+    }
+
+    @Override
+    public Boolean saveOrderVo(OrderVo orderVo) {
+        Boolean saveStatus=orderMapper.saveOrderVo(orderVo);
+        return saveStatus;
+    }
+
+    @Override
+    public void updateStatus(int orderId) {
+        orderMapper.updateStatus(orderId);
     }
 }
