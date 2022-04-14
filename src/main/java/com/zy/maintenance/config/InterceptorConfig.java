@@ -15,7 +15,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 .excludePathPatterns("/manage/**","/**/import","/**/export",
                         "/file/**","/echarts/**","/user/**",
-                        "/store/**","/common/**","/alipay/**");
+                        "/store/**","/common/**","/alipay/**","/payed/notify");
     }
     @Bean
     public JWTInterceptor jwtInterceptor(){

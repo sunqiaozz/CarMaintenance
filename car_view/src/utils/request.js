@@ -2,7 +2,7 @@ import axios from 'axios'
 import ElementUI from 'element-ui';
 
 const service=axios.create({
-    baseURL: 'http://localhost:8090',//同意请求前缀
+    baseURL: 'http://localhost:8090',//统一请求前缀
     timeout: 50000,
 })
 //设置请求拦截器，post请求内容类型

@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 public class PayController {
     @Autowired
     AlipayTemplate alipayTemplate;
-    @Autowired
-    OrderService orderService;
 
     @ResponseBody
     @GetMapping(value = "/payOrder",produces = "text/html")
@@ -29,7 +27,6 @@ public class PayController {
         payVo.setBody("套餐支付:"+packageName);
         System.out.println(payVo);
         String pay = alipayTemplate.pay(payVo);
-        orderService.updateStatus(Integer.parseInt(orderId));
         return pay;
     }
 }

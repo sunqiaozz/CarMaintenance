@@ -20,26 +20,27 @@ const routes = [
     {
         path:'/user',name:'userHome',redirect: '/user/index',
         component:()=>import('../views/user/UserHome'),
+        meta:{cheakIsLogin:true},
         children: [
-            {path: 'index',name:'userIndex',component:()=>import('../views/user/UserIndex')},
-            {path: 'store',name:'userStore',component:()=>import('../views/user/UserStore')},
-            {path: 'news',name:'userNews',component:()=>import('../views/user/UserNews')},
-            {path: 'order',name:'userOrder',component:()=>import('../views/user/UserOrder')},
-            {path: 'info',name:'userInfo',component:()=>import('../views/user/UserInfo')},
+            {path: 'index',name:'userIndex',meta:{cheakIsLogin:true},component:()=>import('../views/user/UserIndex')},
+            {path: 'store',name:'userStore',meta:{cheakIsLogin:true},component:()=>import('../views/user/UserStore')},
+            {path: 'news',name:'userNews',meta:{cheakIsLogin:true},component:()=>import('../views/user/UserNews')},
+            {path: 'order',name:'userOrder',meta:{cheakIsLogin:true},component:()=>import('../views/user/UserOrder')},
+            {path: 'info',name:'userInfo',meta:{cheakIsLogin:true},component:()=>import('../views/user/UserInfo')},
         ]
     },
     //管理员主页
     {
         path:'/manage', name:'manage', redirect:'/manage/home',
         component: ()=>import('../views/manage/ManageHome'),
+        meta:{requireAuth:true},
         children: [
-            {path:'home', name:'home', component:()=>import('../views/manage/Home')},
-            {path:'file', name:'file', component:()=>import('../views/manage/File')},
-            {path:'info', name:'info', component:()=>import('../views/manage/Information')},
-            {path:'users', name:'users', component:()=>import('../views/manage/Users')},
-            {path:'order', name:'order', component:()=>import('../views/manage/Order')},
-            {path:'package', name:'package', component:()=>import('../views/manage/Package')},
-            {path:'/info',name: 'info', component: ()=>import('../views/manage/Information')},//个人信息
+            {path:'home', name:'home',meta:{requireAuth:true}, component:()=>import('../views/manage/Home')},
+            {path:'file', name:'file',meta:{requireAuth:true}, component:()=>import('../views/manage/File')},
+            {path:'info', name:'info',meta:{requireAuth:true}, component:()=>import('../views/manage/Information')},
+            {path:'users', name:'users',meta:{requireAuth:true}, component:()=>import('../views/manage/Users')},
+            {path:'order', name:'order',meta:{requireAuth:true}, component:()=>import('../views/manage/Order')},
+            {path:'package', name:'package',meta:{requireAuth:true}, component:()=>import('../views/manage/Package')},
         ]
     },
     //登录
@@ -59,4 +60,33 @@ const router = new VueRouter({
     //base: process.env.BASE_URL,
     routes
 })
+//前置路由守卫
+router.beforeEach((to, from, next)=>{
+    if (to.meta.cheakIsLogin){
+        const user=JSON.parse(localStorage.getItem("user"))
+        if(user!==null){
+            if(user.token===localStorage.getItem("token")){
+                next()
+            }else {
+                router.back('/')
+            }
+        }else{
+            router.back('/')
+        }
+    } else if(to.meta.requireAuth){
+        const manager=JSON.parse(localStorage.getItem("manager"))
+        if(manager!==null){
+            if(manager.token===localStorage.getItem("token")){
+                next()
+            }else {
+                router.back('/index')
+            }
+        }else{
+            router.back('/index')
+        }
+    }else{
+        next()
+    }
+})
+
 export default router

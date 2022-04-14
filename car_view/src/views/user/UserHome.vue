@@ -72,4 +72,5 @@ export default {
   background-image: linear-gradient(to bottom right,#fc466b,#3f5efb);
   overflow: hidden;
 }
+
 </style>

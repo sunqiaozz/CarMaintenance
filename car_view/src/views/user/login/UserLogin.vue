@@ -78,7 +78,7 @@ export default {
 <style scoped>
 .wrapper{
   height: 100vh;
-  background-image: linear-gradient(to bottom right, #228B22,#FFFF00);
+  background-image: linear-gradient(to bottom right,#483D8B, #228B22);
   overflow: hidden;
 }
 </style>
