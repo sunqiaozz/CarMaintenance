@@ -92,9 +92,7 @@ public class PackageController {
         return Result.success(map);
     }
     @PostMapping("/save")
-    public Result savePackage(@RequestBody Package package1){
-        return  Result.success(packageService.savePackage(package1));
-    }
+    public Result savePackage(@RequestBody Package package1){ return  Result.success(packageService.savePackage(package1)); }
     @DeleteMapping("/deleteAll")
     public Result deleteAll(@RequestBody List<Integer> ids){
         return Result.success(packageService.removeByIds(ids));

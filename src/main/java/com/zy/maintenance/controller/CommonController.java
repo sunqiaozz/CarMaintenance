@@ -23,25 +23,12 @@ import java.util.Random;
 @RestController
 @RequestMapping("/common")
 public class CommonController {
-    @Autowired
-    NewsMapper newsMapper;
+
     @Autowired
     UserService userService;
     @Autowired
     SendQQEmail sendQQEmail;
 
-    //养护知识
-    @GetMapping("/news")
-    public Result getAllNews(){
-        Map<String, Object> map = new HashMap<>();
-        QueryWrapper<News> queryWrapper = new QueryWrapper<>();
-        queryWrapper.orderByDesc("new_id");
-        List<News> newsList = newsMapper.selectList(queryWrapper);
-        Long total = newsMapper.selectCount(queryWrapper);
-        map.put("records",newsList);
-        map.put("total",total);
-        return Result.success(map);
-    }
 
     //用户忘记密码
     //查询用户

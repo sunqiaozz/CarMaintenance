@@ -41,6 +41,7 @@ const routes = [
             {path:'users', name:'users',meta:{requireAuth:true}, component:()=>import('../views/manage/Users')},
             {path:'order', name:'order',meta:{requireAuth:true}, component:()=>import('../views/manage/Order')},
             {path:'package', name:'package',meta:{requireAuth:true}, component:()=>import('../views/manage/Package')},
+            {path:'wiki', name:'wiki',meta:{requireAuth:true}, component:()=>import('../views/manage/News')},
         ]
     },
     //登录

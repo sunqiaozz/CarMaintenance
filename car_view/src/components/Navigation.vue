@@ -29,7 +29,10 @@
           <el-menu-item index="/manage/package"><i class="el-icon-files"></i>套餐设置</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group>
-          <el-menu-item index="/manage/file"><i class="el-icon-folder"></i>文件管理</el-menu-item>
+          <el-menu-item index="/manage/file"><i class="el-icon-folder"></i>文件设置</el-menu-item>
+        </el-menu-item-group>
+        <el-menu-item-group>
+          <el-menu-item index="/manage/wiki"><i class="el-icon-document"></i>百科设置</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>

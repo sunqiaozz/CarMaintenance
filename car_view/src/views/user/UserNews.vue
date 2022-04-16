@@ -49,7 +49,7 @@ export default {
     },
     load () {
       localStorage.setItem("token",JSON.parse(localStorage.getItem("user")).token)
-      this.$http.get('/common/news').then(res=>{
+      this.$http.get('/news/query').then(res=>{
         this.total=res.data.total
         this.cardData=res.data.records
       })
