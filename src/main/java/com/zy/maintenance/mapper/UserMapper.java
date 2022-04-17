@@ -9,10 +9,12 @@ import java.util.List;
 
 
 public interface UserMapper extends BaseMapper<User> {
+    //查询订单--用户
     List<UserHtmlOrder> queryUserOrder(@Param("userName") String userName, @Param("orderStatus") String orderStatus,
                                        @Param("pageNum") Integer pageNum,@Param("pageSize") Integer pageSize);
 
     Integer queryUserOrderTotal(String userName, String orderStatus);
 
+    //忘记密码时重置密码
     Boolean updateUserPass(String password, Integer userId);
 }

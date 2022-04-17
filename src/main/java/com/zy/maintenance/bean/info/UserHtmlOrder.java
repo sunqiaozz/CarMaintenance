@@ -8,6 +8,7 @@ import java.util.Date;
 
 @Data
 public class UserHtmlOrder {
+    //用于接收用户界面的订单数据
     private Integer userId;
     private Integer orderId;
     private String userName;

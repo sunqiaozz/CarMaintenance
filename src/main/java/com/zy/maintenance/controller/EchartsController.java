@@ -32,6 +32,7 @@ public class EchartsController {
         map.put("y",CollUtil.newArrayList(150, 230, 224, 218, 135, 147, 260));
         return Result.success(map);
     }
+
     @GetMapping("/packageNum")
     public Result echartsNum(){
         Map<String, Object> map = new HashMap<>();

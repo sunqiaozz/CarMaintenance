@@ -34,6 +34,7 @@ public class FileController {
     @Resource
     private FileMapper fileMapper;
 
+    //文件上传
     @PostMapping("/upload")
     public String upload(@RequestParam("file") MultipartFile file) throws IOException {
         String originalFilename = file.getOriginalFilename();

@@ -1,5 +1,6 @@
 package com.zy.maintenance.controller;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
@@ -52,7 +53,7 @@ public class UserController {
         if(user!=null){
             throw new ServiceException(StatusCode.CODE_600,"用户名已存在");
         }else {
-            return  Result.success(true);
+            return Result.success(true);
         }
     }
     //登录校验
@@ -80,7 +81,7 @@ public class UserController {
         writer.addHeaderAlias("userId","用户Id");
         writer.addHeaderAlias("userName","用户名");
         writer.addHeaderAlias("realName","姓名");
-        writer.addHeaderAlias("password","密码");
+       // writer.addHeaderAlias("password","密码");
         writer.addHeaderAlias("gender","性别");
         writer.addHeaderAlias("telephone","电话号码");
         writer.addHeaderAlias("email","电子邮箱");
@@ -105,16 +106,21 @@ public class UserController {
         InputStream inputStream=file.getInputStream();
         ExcelReader reader=ExcelUtil.getReader(inputStream);
         //1.bean对应方法，表头必须是英文对象bean属性
-        List<User> list=reader.readAll(User.class);
+        //List<User> list=reader.readAll(User.class);
         //2.忽略表头的写法，手动指定数据对应方式
-        /*List<List<Object>> lists = reader.read(1);
+        List<List<Object>> lists = reader.read(1);
         List<User> users = CollUtil.newArrayList();
-        for (List<Object> row : lists) {
+        for (List<Object> list : lists) {
             User user = new User();
-            user.setUserName(row.get(0).toString());
+            user.setUserName(list.get(0).toString());
+            user.setRealName(list.get(1).toString());
+            user.setPassword(list.get(2).toString());
+            user.setGender(list.get(3).toString());
+            user.setTelephone(list.get(4).toString());
+            user.setEmail(list.get(5).toString());
             users.add(user);
-        }*/
-        return Result.success(userService.saveBatch(list));
+        }
+        return Result.success(userService.saveBatch(users));
     }
     //分页查询
     @GetMapping("/page")

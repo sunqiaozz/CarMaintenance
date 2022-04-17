@@ -46,6 +46,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
         }
     }
 
+    //用户界面查询用户订单
     @Override
     public Map<String,Object> queryUserOrder(String userName, String orderStatus, Integer pageNum, Integer pageSize) {
         Map<String, Object> map = new HashMap<>();
@@ -57,6 +58,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
         return map;
     }
 
+    //重置密码
     @Override
     public Boolean updatePass(String password, Integer userId) {
         return userMapper.updateUserPass(password,userId);
