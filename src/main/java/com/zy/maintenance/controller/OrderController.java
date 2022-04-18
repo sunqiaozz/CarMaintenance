@@ -112,8 +112,8 @@ public class OrderController {
                 case "orderProgress": searchType="order_progress";break;
                 default: searchType="";break;
             }
-            System.out.println(searchType);
-            System.out.println(searchContent);
+            /*System.out.println(searchType);
+            System.out.println(searchContent);*/
         }
         pageNum=(pageNum-1)*pageSize;
         List<Order> orders = orderService.orderPage(pageNum, pageSize, searchType, searchContent);

@@ -5,7 +5,7 @@ import lombok.Data;
 
 @AllArgsConstructor
 @Data
-//用于接收数据库的订单数据--order界面显示信息时
+//在order实体中使用--用来接收数据库三表查询的数据
 public class PackageInfo {
     private Integer packageId;
     private String packageName;

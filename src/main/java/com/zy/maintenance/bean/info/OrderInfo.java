@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @TableName(value = "car_order")
-//用于仅仅接收数据库的订单数据
+//用于接收excel导入的数据
 public class OrderInfo {
     @TableId(type = IdType.AUTO)
     private Integer order_id;

@@ -17,6 +17,7 @@ import java.util.Date;
 @ToString
 @Data
 @TableName(value = "car_order")
+//用户确认信息生成订单时接收订单数据
 public class OrderVo {
     @TableId(type = IdType.AUTO)
     private Integer orderId;

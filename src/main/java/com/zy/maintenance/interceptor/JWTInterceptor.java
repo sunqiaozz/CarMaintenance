@@ -34,7 +34,7 @@ public class JWTInterceptor  implements HandlerInterceptor {
         if(!(handler instanceof HandlerMethod)){
             return true;
         }
-        System.out.println(token);
+        //System.out.println(token);
         // 执行认证
         if (StrUtil.isBlank(token)) {
             throw new ServiceException(StatusCode.CODE_401, "无token，请重新登录");
@@ -64,7 +64,7 @@ public class JWTInterceptor  implements HandlerInterceptor {
                 throw new ServiceException(StatusCode.CODE_401,"token验证失败，请重新登录");
             }
         }else {
-            System.out.println(id+"qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
+            //System.out.println(id+"qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
             QueryWrapper<User> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("user_id",id);
             User user = userService.getOne(queryWrapper);

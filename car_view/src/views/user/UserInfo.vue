@@ -14,7 +14,7 @@
           <el-input v-model="form.userName" disabled autocomplete="off" style="width: 200px"></el-input>
         </el-form-item>
         <el-form-item label="姓名">
-          <el-input v-model="form.realName" autocomplete="off" style="width: 200px"></el-input>
+          <el-input v-model="form.realName" autocomplete="off" style="width: 200px" placeholder="请输入姓名"></el-input>
         </el-form-item>
         <el-form-item label="性别">
           <el-radio v-model="form.gender" label="男">男</el-radio>
@@ -22,10 +22,10 @@
 <!--          <el-input v-model="form.gender" autocomplete="off" style="width: 200px"></el-input>-->
         </el-form-item>
         <el-form-item label="联系方式" prop="telephone">
-          <el-input v-model="form.telephone" autocomplete="off" style="width: 200px"></el-input>
+          <el-input v-model="form.telephone" autocomplete="off" style="width: 200px" placeholder="请输入电话号码"></el-input>
         </el-form-item>
         <el-form-item label="电子邮箱" prop="email">
-          <el-input v-model="form.email" autocomplete="off" style="width: 200px"></el-input>
+          <el-input v-model="form.email" autocomplete="off" style="width: 200px" placeholder="请输入电子邮箱"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="save" style="width: 200px;margin: 10px 0">确 定</el-button>

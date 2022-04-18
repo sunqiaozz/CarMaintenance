@@ -25,7 +25,7 @@ public class PayController {
         payVo.setSubject(packageName+"套餐");
         payVo.setTotal_amount(packagePrice);
         payVo.setBody("套餐支付:"+packageName);
-        System.out.println(payVo);
+        //System.out.println(payVo);
         String pay = alipayTemplate.pay(payVo);
         return pay;
     }

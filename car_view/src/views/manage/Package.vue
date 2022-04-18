@@ -17,18 +17,19 @@
       <template>
         <el-button type="primary" @click="addPackage">新增<i class="el-icon-circle-plus-outline"></i></el-button>
         <el-dialog title="套餐信息" :visible.sync="dialogFormVisible" width="25%" center>
-          <el-form label-width="80px" size="small">
+          <el-form :rules="rules" ref="packageForm" :model="form" label-width="80px" size="small">
             <el-form-item label="套餐名称">
-              <el-input v-model="form.packageName" autocomplete="off"></el-input>
-            </el-form-item>
-            <el-form-item label="套餐内容">
-              <el-input v-model="form.packageContent" autocomplete="off"></el-input>
+              <el-input v-model="form.packageName" autocomplete="off" placeholder="请输入套餐名称"></el-input>
             </el-form-item>
             <el-form-item label="套餐类型">
-              <el-input v-model="form.packageType" autocomplete="off"></el-input>
+              <el-input v-model="form.packageType" autocomplete="off" placeholder="请输入套餐类型"></el-input>
             </el-form-item>
-            <el-form-item label="套餐价格">
-              <el-input v-model="form.packagePrice" autocomplete="off"></el-input>
+            <el-form-item label="套餐价格" prop="packagePrice">
+              <el-input v-model="form.packagePrice" autocomplete="off" placeholder="请输入价格"></el-input>
+            </el-form-item>
+            <el-form-item label="套餐内容">
+              <el-input type="textarea" placeholder="请输入内容" v-model="form.packageContent" show-word-limit autocomplete="off" ></el-input>
+<!--              <el-input v-model="form.packageContent" autocomplete="off"></el-input>-->
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
@@ -97,7 +98,23 @@
 export default {
   name: "Package",
   data(){
+    const checkPrice= (rule, value, callback) => {
+      let reg=/^\d+(\.{0,1}\d{1,2}){0,1}$/
+      if(!value){
+        callback(new Error('单价不能为空'))
+      }else if(!reg.test(value)){
+        callback(new Error('请输入正确的价格'))
+      }else {
+        callback()
+      }
+    }
     return{
+      rules:{
+        packagePrice: [
+          { required: true, validator:checkPrice, trigger: 'blur' },
+        ]
+      },
+
       fullscreenLoading: false,
       //搜索查询分页
       options: [{
@@ -164,15 +181,22 @@ export default {
       this.dialogFormVisible=true
     },
     savePackage(){
-      localStorage.setItem("token",JSON.parse(localStorage.getItem("manager")).token)
-      this.$http.post("/package/save",this.form).then(res =>{
-        if(res.data){
-          this.$message.success("保存成功")
-          this.dialogFormVisible = false
-          this.load()
-          this.form={}
+      this.$refs.packageForm.validate((validate)=>{
+        if(validate){
+          localStorage.setItem("token",JSON.parse(localStorage.getItem("manager")).token)
+          this.$http.post("/package/save",this.form).then(res =>{
+            if(res.data){
+              this.$message.success("保存成功")
+              this.dialogFormVisible = false
+              this.load()
+              this.form={}
+            }else{
+              this.$message.error("保存失败")
+            }
+          })
         }else{
-          this.$message.error("保存失败")
+          this.$message.error("请输入正确的信息")
+          return false
         }
       })
       //this.load()

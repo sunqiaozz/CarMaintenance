@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     /**
+     * 异常处理类
      * 如果抛出异常调用该方法
      */
     @ExceptionHandler(ServiceException.class)

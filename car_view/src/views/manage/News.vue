@@ -10,8 +10,8 @@
         <el-button type="primary" @click="addNews">新增<i class="el-icon-circle-plus-outline"></i></el-button>
         <el-dialog title="百科信息" :visible.sync="dialogFormVisible" width="25%" center>
           <el-form label-width="80px" size="small">
-            <el-form-item label="百科名称">
-              <el-input v-model="form.newName" autocomplete="off"></el-input>
+            <el-form-item label="百科名称" >
+              <el-input v-model="form.newName" autocomplete="off" placeholder="请输入名称"></el-input>
             </el-form-item>
             <el-form-item label="百科内容">
               <el-input type="textarea" placeholder="请输入内容" v-model="form.newContent" show-word-limit autocomplete="off" ></el-input>
