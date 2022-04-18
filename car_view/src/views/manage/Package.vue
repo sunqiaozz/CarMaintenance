@@ -188,6 +188,7 @@ export default {
             if(res.data){
               this.$message.success("保存成功")
               this.dialogFormVisible = false
+              this.reset()
               this.load()
               this.form={}
             }else{

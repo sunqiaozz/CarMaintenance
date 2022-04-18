@@ -1,6 +1,7 @@
 package com.zy.maintenance.controller;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,6 +79,7 @@ public class NewsController {
             News news = new News();
             news.setNewName(list.get(0).toString());
             news.setNewContent(list.get(1).toString());
+            news.setNewTime(DateUtil.parseDateTime(list.get(2).toString()));
             newsList.add(news);
         }
         return  Result.success(newsService.saveBatch(newsList));

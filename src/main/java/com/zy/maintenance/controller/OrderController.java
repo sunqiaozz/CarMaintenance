@@ -1,9 +1,11 @@
 package com.zy.maintenance.controller;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
+import com.sun.xml.internal.fastinfoset.util.CharArray;
 import com.zy.maintenance.bean.Order;
 import com.zy.maintenance.bean.info.OrderExport;
 import com.zy.maintenance.bean.info.OrderInfo;
@@ -20,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -91,6 +94,7 @@ public class OrderController {
             orderInfo.setPackage_id(Integer.parseInt(list.get(1).toString()));
             orderInfo.setOrder_status(list.get(2).toString());
             orderInfo.setOrder_progress(Integer.parseInt(list.get(3).toString()));
+            orderInfo.setOrderTime(DateUtil.parseDateTime(list.get(4).toString()));
             orders.add(orderInfo);
         }
         System.out.println(orders);

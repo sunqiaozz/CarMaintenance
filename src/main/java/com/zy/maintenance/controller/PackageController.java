@@ -89,6 +89,7 @@ public class PackageController {
         IPage<Package> iPage = packageService.page(page, queryWrapper);
         map.put("total", iPage.getTotal());
         map.put("records",iPage.getRecords());
+
         return Result.success(map);
     }
     @PostMapping("/save")

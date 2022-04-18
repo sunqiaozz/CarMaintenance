@@ -69,6 +69,11 @@ export default {
   },
   created() {
     this.getUser().then(res=>{
+      console.log(res)
+      // if(res.gender===null){
+      //   res.gender='男'
+      // }
+      console.log(res)
       this.form=res
     })
   },

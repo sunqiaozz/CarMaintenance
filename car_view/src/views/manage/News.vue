@@ -60,7 +60,7 @@
               icon="el-icon-info"
               icon-color="red"
               title="确定删除吗？"
-              @confirm="del(scope.row.userId)">
+              @confirm="del(scope.row.newId)">
             <el-button type="danger" slot="reference" class="ml-10">删除<i class="el-icon-remove-outline"></i></el-button>
           </el-popconfirm>
         </template>

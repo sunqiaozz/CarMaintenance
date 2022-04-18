@@ -178,7 +178,6 @@ export default {
         console.log(res.data)
         this.total=res.data.total
         this.tableData=res.data.records
-        this.name=''
       })
     }
   }
